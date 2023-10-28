@@ -10,6 +10,14 @@ myText.addEventListener("input", function() {
         myText.value = myText.value.slice(0, limit);
     }
 
+    const inputValue = myText.value;
+    localStorage.setItem('myText', inputValue);
+
+    const savedValue = localStorage.getItem('myText');
+    if (savedValue) {
+        myText.value = savedValue;
+    }
+
     result.textContent = textLength + "/" + limit;
 
     if (textLength > limit) {
@@ -18,5 +26,12 @@ myText.addEventListener("input", function() {
     } else {
         myText.style.borderColor = "#b2b2b2";
         result.style.color = "#737373";
+    }
+});
+
+window.addEventListener('load', function() {
+    const savedValue = localStorage.getItem('myText');
+    if (savedValue) {
+        myText.value = savedValue;
     }
 });
